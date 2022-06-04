@@ -1,0 +1,13 @@
+GET  http://localhost:3003/api/blogs
+
+###
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title": "hello3",
+    "author": "qkh",
+    "url": "http://www.google.com",
+    "likes": 300
+}
+

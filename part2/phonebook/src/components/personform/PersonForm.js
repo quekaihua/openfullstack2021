@@ -31,6 +31,15 @@ const PersonForm = ({ persons, setPersons, setErrorMessage, setStatus }) => {
               setErrorMessage("");
               setStatus("");
             }, 3000);
+          })
+          .catch((err) => {
+            setErrorMessage(err.message);
+            setStatus("error");
+
+            setTimeout(() => {
+              setErrorMessage("");
+              setStatus("");
+            }, 3000);
           });
       }
     } else {
@@ -53,6 +62,13 @@ const PersonForm = ({ persons, setPersons, setErrorMessage, setStatus }) => {
         })
         .catch((err) => {
           console.log(err);
+          setErrorMessage(err.response.data.error);
+          setStatus("error");
+
+          setTimeout(() => {
+            setErrorMessage("");
+            setStatus("");
+          }, 3000);
         });
     }
   };

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import Persons from "./components/persons/Persons";
 import PersonForm from "./components/personform/PersonForm";
 import Filter from "./components/filter/Filter";
 import Notification from "./components/notification/Notification";
+import phonebookService from "./services/phonebook";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -14,7 +14,7 @@ const App = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
+    phonebookService.getAll().then((response) => {
       setPersons(response.data);
     });
   }, []);
