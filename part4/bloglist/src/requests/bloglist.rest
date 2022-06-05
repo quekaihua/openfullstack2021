@@ -5,9 +5,25 @@ POST http://localhost:3003/api/blogs
 content-type: application/json
 
 {
-    "title": "hello3",
-    "author": "qkh",
-    "url": "http://www.google.com",
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 5
+}
+
+###
+GET  http://localhost:3003/api/blogs/629cf624f9117f15b3aedafb
+
+###
+PUT  http://localhost:3003/api/blogs/629cf624f9117f15b3aedafb
+content-type: application/json
+
+{
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
     "likes": 300
 }
 
+###
+DELETE   http://localhost:3003/api/blogs/629cd66e32aa4023f201ed45
