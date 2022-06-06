@@ -3,17 +3,17 @@ GET  http://localhost:3003/api/blogs
 ###
 POST http://localhost:3003/api/blogs
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MjlkYzNlOWE0MzU2NWQzZTQ0MjA0MzkiLCJpYXQiOjE2NTQ1MDcyMjR9.CM1tEYft2OCoWNRRv1t9YvZ-RqomY1RE9h9bryqyFnw
 
 {
-    "title": "React patterns",
+    "title": "React patterns3",
     "author": "Michael Chan",
     "url": "https://reactpatterns.com/",
-    "likes": 5,
-    "userId": "629dbf0740114d1c42200843"
+    "likes": 5
 }
 
 ###
-GET  http://localhost:3003/api/blogs/629cf624f9117f15b3aedafb
+GET  http://localhost:3003/api/blogs/629dcb878eb6174b985a699d
 
 ###
 PUT  http://localhost:3003/api/blogs/629cf624f9117f15b3aedafb
@@ -27,4 +27,5 @@ content-type: application/json
 }
 
 ###
-DELETE   http://localhost:3003/api/blogs/629cd66e32aa4023f201ed45
+DELETE   http://localhost:3003/api/blogs/629dcb878eb6174b985a699d
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2MjlkYzNlOWE0MzU2NWQzZTQ0MjA0MzkiLCJpYXQiOjE2NTQ1MDcyMjR9.CM1tEYft2OCoWNRRv1t9YvZ-RqomY1RE9h9bryqyFnw

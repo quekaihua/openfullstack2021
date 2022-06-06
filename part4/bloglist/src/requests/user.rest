@@ -4,7 +4,16 @@ POST http://localhost:3003/api/users
 content-type: application/json
 
 {
-    "name": "React learner",
-    "username": "Michael Chan",
-    "password": "https://reactpatterns.com/"
+    "name": "Matti Kfai",
+    "username": "test",
+    "password": "test"
+}
+
+###
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+    "username": "test",
+    "password": "test"
 }

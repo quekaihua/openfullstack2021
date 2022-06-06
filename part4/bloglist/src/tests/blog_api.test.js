@@ -51,25 +51,26 @@ describe('viewing a specific blog', () => {
     const processedBlogToView = JSON.parse(JSON.stringify(blogToView));
     expect(resultNote.body).toEqual(processedBlogToView);
   }, 100000);
-  test('Unique identifier to be defined _id', async () => {
-    const blogs = await helper.blogsInDb();
-    console.log(blogs);
-    // eslint-disable-next-line no-underscore-dangle
-    expect(blogs[0]._id).toBeDefined();
-  });
+  // test('Unique identifier to be defined _id', async () => {
+  //   const blogs = await helper.blogsInDb();
+  //   console.log(blogs);
+  //   // eslint-disable-next-line no-underscore-dangle
+  //   expect(blogs[0]._id).toBeDefined();
+  // });
 });
 
 describe('addition of a new blog', () => {
   test('a valid blog can be added', async () => {
     const newBlog = {
-      title: 'async/await simplifies making async calls',
+      title: 'async/await simplifies making async calls by test add',
       author: 'qkh',
       url: 'https://reactpatterns.com/',
       likes: 17,
     };
-
+    const token = `bearer ${helper.token}`;
     await api
       .post('/api/blogs')
+      .set('Authorization', token)
       .send(newBlog)
       .expect(200)
       .expect('Content-Type', /application\/json/);
@@ -80,9 +81,23 @@ describe('addition of a new blog', () => {
 
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1);
     expect(titles).toContain(
-      'async/await simplifies making async calls',
+      'async/await simplifies making async calls by test add',
     );
-  }, 100000);
+  });
+  test('an unvalid token blog can\'t be added', async () => {
+    const newBlog = {
+      title: 'async/await simplifies making async calls',
+      author: 'qkh',
+      url: 'https://reactpatterns.com/',
+      likes: 17,
+    };
+    const token = 'bearer';
+    await api
+      .post('/api/blogs')
+      .set('Authorization', token)
+      .send(newBlog)
+      .expect(401);
+  });
 
   test('add default blog like eq 0', async () => {
     const newBlog = {
@@ -90,9 +105,10 @@ describe('addition of a new blog', () => {
       author: 'qkh',
       url: 'https://reactpatterns.com/',
     };
-
+    const token = `bearer ${helper.token}`;
     await api
       .post('/api/blogs')
+      .set('Authorization', token)
       .send(newBlog)
       .expect(200)
       .expect('Content-Type', /application\/json/);
@@ -100,9 +116,8 @@ describe('addition of a new blog', () => {
     const blogsAtEnd = await helper.blogsInDb();
 
     const blogInDb = blogsAtEnd.find((r) => r.title === newBlog.title);
-    console.log('blogInDb', blogInDb);
     expect(blogInDb.likes).toBe(0);
-  }, 100000);
+  });
 
   test('blog without title is not added', async () => {
     const newBlog = {
@@ -111,24 +126,29 @@ describe('addition of a new blog', () => {
       likes: 7,
     };
 
+    const token = `bearer ${helper.token}`;
     await api
       .post('/api/blogs')
+      .set('Authorization', token)
       .send(newBlog)
       .expect(400);
 
     const blogsAtEnd = await helper.blogsInDb();
 
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length);
-  }, 100000);
+  });
 });
 
 describe('deletion of a blog', () => {
   test('a blog can be deleted', async () => {
-    const blogsAtStart = await helper.blogsInDb();
-    const blogToDelete = blogsAtStart[0];
-
+    const blogs = await helper.blogsInDb();
+    console.log('delete: ', blogs);
+    const blogToDelete = blogs[0];
+    console.log('blogToDelete: ', blogToDelete);
+    const token = `bearer ${helper.token}`;
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
+      .set('Authorization', token)
       .expect(204);
 
     const notesAtEnd = await helper.blogsInDb();
