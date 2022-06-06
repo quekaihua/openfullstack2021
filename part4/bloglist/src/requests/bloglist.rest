@@ -8,7 +8,8 @@ content-type: application/json
     "title": "React patterns",
     "author": "Michael Chan",
     "url": "https://reactpatterns.com/",
-    "likes": 5
+    "likes": 5,
+    "userId": "629dbf0740114d1c42200843"
 }
 
 ###
